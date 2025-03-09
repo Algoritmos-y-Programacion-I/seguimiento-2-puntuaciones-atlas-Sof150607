@@ -42,7 +42,7 @@ public class AtlasPuntuaciones {
 	{
 		// Declaracion de todas las variables a usar en el programa
 
-		int cantJugadores, cantRondas, puntaje;
+		int cantJugadores, cantRondas;
 
 
 		// Notificacion al usuario de la solicitud de dato
@@ -51,23 +51,35 @@ public class AtlasPuntuaciones {
 
 		System.out.println("Por favor, ingrese la cantidad de jugadores (Máx. 10):");
         cantJugadores = escaner.nextInt();
+
+		while (cantJugadores < 1 || cantJugadores > CANT_MAX_JUGADORES) {
+            System.out.print("Recuerde que son máximo 10 jugadores, ingrese el número nuevamente: ");
+            cantJugadores = escaner.nextInt();
+        }
 		
 
 		System.out.println("Ahora, ingrese la cantidad de rondas a jugar (Máx. 5):");
         cantRondas = escaner.nextInt();
 
+		while (cantRondas < 1 || cantRondas > CANT_MAX_RONDAS) {
+            System.out.print("Recuerde que son máximo 5 rondas, ingrese el número nuevamente: ");
+            cantRondas = escaner.nextInt();
+        }
+
        //almacenar puntaje de cada jugador
 
-	   int [] puntajeTotal = new int [cantJugadores]; //aqui voy a guardar los puntos de los jugadores
+	   int [] puntajeTotal = new int [cantJugadores]; //aqui voy a guardar los puntajes totales de los jugadores
        double[] promedio = new double[cantJugadores]; // arreglo para almacenar los promedios de cada jugador
 
 	   for (int i = 0; i < cantJugadores; i++){
 
 		   for (int j = 0; j < cantRondas; j++){
-             System.out.println("Jugador " + (i+1) + "- Puntaje en ronda" + (j+1) );
+             System.out.println("Jugador " + (i+1) + "- Puntaje en ronda " + (j+1) );
 			  puntajeTotal[i] += escaner.nextInt(); // suma de una vez los puntajes ingresados de cada ronda por jgador y el resultado se guarda en el arreglo
 		   }
 	   }
+
+
 
 
 		// Realizamos los cálculos delegandolos a los métodos // Notificación al usuario de los resultados
@@ -78,10 +90,17 @@ public class AtlasPuntuaciones {
 			System.out.println("Jugador " + (i + 1) + " - Puntaje total: " + puntajeTotal[i] + ", Promedio: " + promedio[i]);
 		}
 
+		int mayorPuntaje = encontrarMayor(puntajeTotal);
+		int jugadorMayor = 0;
+
+		for (int i = 0; i < cantJugadores; i++) {
+			if (puntajeTotal[i] == mayorPuntaje) {
+				jugadorMayor = i + 1; 
+			}
+		}
+
+		System.out.println("Jugador con el puntaje más alto: jugador " + jugadorMayor);
 		
-
-
-
 
 	}
 
@@ -93,12 +112,12 @@ public class AtlasPuntuaciones {
 	/**
 	 * Descripción: El método calcularSumaTotal permite ... calcular la suma total del puntaje (por ronda) de cada jugador
 	 * pero en este caso como sumé de una vez los datos al almacenarlos en el arreglo no usé este método
-	 * @param int[] numeros
+	 * @param int[] 
 	 * @return 
 	 */
 
     public int calcularSumaTotal(int[] numeros) {
-        // Completar
+       
 		return 0;
     }
 
@@ -116,13 +135,18 @@ public class AtlasPuntuaciones {
 
 	/**
 	 * Descripción: El método encontrarMayor permite ... identificar cual jugador tuvo la puntuación mas alta
-	 * @param double[] numeros
-	 * @return 
+	 * @param double[] puntajeTotal
+	 * @return Jugador con mayor puntaje
 	 */
 
-    public double encontrarMayor(double[] numeros) {
-        // Completar
-		return 0;
+    public int encontrarMayor(int[] puntajeTotal) {
+		int mayor = 0;
+		for (int i = 1; i < puntajeTotal.length; i++){ //.lenght para que recorra todo el arreglo
+			if (puntajeTotal[i] > mayor)
+			mayor = puntajeTotal[i];
+		}
+
+		return mayor;
     }
 
 	
