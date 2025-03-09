@@ -140,8 +140,8 @@ public class AtlasPuntuaciones {
 	 */
 
     public int encontrarMayor(int[] puntajeTotal) {
-		int mayor = 0;
-		for (int i = 1; i < puntajeTotal.length; i++){ //.lenght para que recorra todo el arreglo
+		int mayor = puntajeTotal[0]; 
+		for (int i = 0; i < puntajeTotal.length; i++){ //.lenght para que recorra todo el arreglo
 			if (puntajeTotal[i] > mayor)
 			mayor = puntajeTotal[i];
 		}
